@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background-color: #000;
+  font-family: Arial, sans-serif;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}

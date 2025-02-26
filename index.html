@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar System Simulation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="fixed top-0 left-0 p-4 bg-black/50 text-white rounded-br-lg z-10">
+      <h3 class="text-lg font-bold mb-2">Solar System Simulation</h3>
+      <p class="text-sm">Use mouse to rotate, zoom and pan</p>
+      <p class="text-sm">Click on a planet to view details</p>
+    </div>
+    <!-- PlanetInfoPanel will be rendered by SolidJS -->
+    <div id="planet-info-panel"></div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
