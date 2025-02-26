@@ -108,6 +108,37 @@ To preview the production build locally:
 npm run preview
 ```
 
+## Deploying to GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+### Automatic Deployment
+
+When you push changes to the `main` branch, the GitHub Actions workflow will automatically:
+
+1. Build the project
+2. Deploy it to the `gh-pages` branch
+3. Make it available at `https://your-username.github.io/solar-system/`
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+1. Build the project:
+
+   ```bash
+   npm run build
+   ```
+
+2. Deploy the `dist` directory to GitHub Pages using your preferred method.
+
+### Configuration
+
+The deployment configuration is in:
+
+- `.github/workflows/deploy.yml` - GitHub Actions workflow file
+- `vite.config.ts` - Base path configuration for GitHub Pages
+
 ## Development Notes
 
 - The simulation uses scale factors to make the visualization more appealing, as real-scale would make planets too small and too far apart
