@@ -62,7 +62,7 @@ export class SolarSystem {
     this.initPlanetInfoPanel();
 
     // Add ambient light - increased intensity for a lighter scene
-    const ambientLight = new THREE.AmbientLight(0x888888);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     this.scene.add(ambientLight);
 
     // Create stars background
@@ -136,7 +136,7 @@ export class SolarSystem {
 
   public createSun(): CelestialBody {
     // Create a point light for the sun - increased intensity for a brighter scene
-    this.sunLight = new THREE.PointLight(0xffffff, 2.0, 1500);
+    this.sunLight = new THREE.PointLight(0xffffff, 3.0, 1500);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.mapSize.width = 2048;
     this.sunLight.shadow.mapSize.height = 2048;
