@@ -71,8 +71,6 @@ export function PlanetInfoPanel(props: PlanetInfoPanelProps) {
 
   // Call updatePlanetDetails whenever currentPlanet changes
   createEffect(() => {
-    // Access the signal to track it
-    const planetName = props.currentPlanet();
     updatePlanetDetails();
   });
 

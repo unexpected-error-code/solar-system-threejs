@@ -247,7 +247,7 @@ export class SolarSystem {
     } else if (!this.planetInfoPanelApi.isShowing() || (event.target instanceof HTMLElement && !event.target.closest("#planet-info-panel"))) {
       // If clicked on empty space and not on the info panel, hide the panel
       this.planetInfoPanelApi.hide();
-      this.selectedPlanet = null;
+      if (this.selectedPlanet) this.selectedPlanet = null;
     }
   }
 

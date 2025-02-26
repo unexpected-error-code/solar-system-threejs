@@ -33,8 +33,6 @@ export class CelestialBody {
   private orbitEccentricity: number;
   private orbitAngle: number = 0;
   private initialPosition: THREE.Vector3;
-  private trajectoryPoints: THREE.Vector3[] = [];
-  private maxTrajectoryPoints: number = 200;
 
   constructor(params: CelestialBodyParams) {
     this.name = params.name;
@@ -72,7 +70,6 @@ export class CelestialBody {
 
     // Create orbit line if this body orbits
     if (this.orbitRadius > 0) {
-      //this.createOrbitLine();
       // Create trajectory line for orbiting bodies
       this.createTrajectory();
     }
@@ -81,45 +78,6 @@ export class CelestialBody {
     if (params.hasRings && params.ringsInnerRadius && params.ringsOuterRadius) {
       this.createRings(params.ringsInnerRadius, params.ringsOuterRadius, params.ringsColor || 0xffffff);
     }
-  }
-
-  private createOrbitLine(): void {
-    // Create an elliptical orbit path
-    const curve = new THREE.EllipseCurve(
-      0,
-      0, // Center x, y
-      this.orbitRadius,
-      this.orbitRadius * (1 - this.orbitEccentricity), // xRadius, yRadius
-      0,
-      2 * Math.PI, // startAngle, endAngle
-      false, // clockwise
-      0 // rotation
-    );
-
-    const points = curve.getPoints(100);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
-    // Convert 2D points to 3D and apply inclination
-    const positions = new Float32Array(points.length * 3);
-    for (let i = 0; i < points.length; i++) {
-      const point = points[i];
-      positions[i * 3] = point.x;
-      positions[i * 3 + 1] = 0;
-      positions[i * 3 + 2] = point.y;
-    }
-
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-
-    // Apply orbit inclination
-    geometry.rotateX((this.orbitInclination * Math.PI) / 180);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.6,
-    });
-
-    this.orbitLine = new THREE.Line(geometry, material);
   }
 
   private createRings(innerRadius: number, outerRadius: number, color: number): void {
