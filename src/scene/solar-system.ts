@@ -48,7 +48,7 @@ export class SolarSystem {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
-    this.controls.minDistance = 20;
+    this.controls.minDistance = 5;
     this.controls.maxDistance = 2000; // Increased to allow zooming out to see the entire system
 
     // Initialize the clock for animation
@@ -204,6 +204,22 @@ export class SolarSystem {
   private setupEventListeners(domElement: HTMLCanvasElement): void {
     // Add click event listener for planet selection
     domElement.addEventListener("click", this.onCanvasClick.bind(this));
+
+    // Add touch event listener for planet selection on mobile devices
+    domElement.addEventListener("touchend", (event: TouchEvent) => {
+      // Prevent default to avoid scrolling/zooming conflicts
+      event.preventDefault();
+
+      if (event.changedTouches.length > 0) {
+        const touch = event.changedTouches[0];
+        // Convert touch position to mouse position and call onCanvasClick
+        const mouseEvent = new MouseEvent("click", {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+        });
+        this.onCanvasClick(mouseEvent);
+      }
+    });
   }
 
   private onCanvasClick(event: MouseEvent): void {
@@ -254,12 +270,12 @@ export class SolarSystem {
       // Calculate base distance based on planet radius
       // Range from 5 (smallest planets) to 15 (largest planets)
       const minBaseDistance = 5;
-      const maxBaseDistance = 15;
+      const maxBaseDistance = 25;
 
       // Get the normalized radius value (0 to 1) based on the range of planet sizes
       // Mercury has radius ~0.38, Jupiter has radius ~11.2
-      const minRadius = 0.38; // Mercury's radius
-      const maxRadius = 11.2; // Jupiter's radius
+      const minRadius = PLANET_DATA.mercury.radius; // Mercury's radius
+      const maxRadius = PLANET_DATA.jupiter.radius; // Jupiter's radius
 
       // Normalize the radius to a 0-1 range
       const normalizedRadius = Math.min(Math.max((planetData.radius - minRadius) / (maxRadius - minRadius), 0), 1);
