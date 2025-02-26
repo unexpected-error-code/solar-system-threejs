@@ -238,8 +238,10 @@ export class SolarSystem {
   private selectPlanet(planet: CelestialBody): void {
     this.selectedPlanet = planet;
 
-    // Show planet info
-    this.planetInfoPanelApi.show(planet.name);
+    // Show planet info with delay
+    setTimeout(() => {
+      this.planetInfoPanelApi.show(planet.name);
+    }, 1000);
 
     // Find the planet data to get its radius
     const planetName = planet.name.toLowerCase();

@@ -90,10 +90,10 @@ export function PlanetInfoPanel(props: PlanetInfoPanelProps) {
 
   return (
     <Show when={props.isVisible()}>
-      <div class="fixed top-0 right-0 w-96 h-full bg-white shadow-lg p-6 overflow-y-auto">
+      <div class="fixed z-50 top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg p-6 overflow-y-auto">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-xl font-bold">{props.currentPlanet()}</h2>
-          <button onClick={hide} class="p-2 hover:bg-gray-100 rounded-full" aria-label="Close panel">
+          <button onClick={hide} class="p-2 text-2xl hover:bg-gray-100 rounded-full" aria-label="Close panel">
             &times;
           </button>
         </div>
